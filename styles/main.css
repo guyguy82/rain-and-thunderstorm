@@ -11,8 +11,8 @@
   --shadow: 0 24px 50px rgba(0, 0, 0, 0.38);
   --rain-accent: #8db6ff;
   --rain-accent-strong: #cfe0ff;
-  --storm-accent: #f3b24c;
-  --storm-accent-strong: #ffe3af;
+  --storm-accent: #a73a34;
+  --storm-accent-strong: #de6259;
   --spotify: #1ed760;
   --spotify-dark: #072112;
 }
@@ -33,7 +33,7 @@ body {
   font-family: "Rajdhani", sans-serif;
   background:
     radial-gradient(900px 460px at 12% 0%, rgba(141, 182, 255, 0.14), transparent 60%),
-    radial-gradient(760px 420px at 88% 8%, rgba(243, 178, 76, 0.14), transparent 58%),
+    radial-gradient(760px 420px at 88% 8%, rgba(167, 58, 52, 0.16), transparent 58%),
     linear-gradient(180deg, var(--bg-2), var(--bg-1) 42%, var(--bg-0));
   transition: background 0.25s ease;
 }
@@ -60,7 +60,7 @@ body[data-active-track="rain"] {
 body[data-active-track="thunderstorm"] {
   --active-accent: var(--storm-accent);
   --active-accent-strong: var(--storm-accent-strong);
-  --active-glow: rgba(243, 178, 76, 0.24);
+  --active-glow: rgba(167, 58, 52, 0.24);
 }
 
 a,
@@ -153,7 +153,7 @@ button {
   gap: 0.9rem;
   background:
     radial-gradient(900px 460px at 12% 0%, rgba(141, 182, 255, 0.08), transparent 58%),
-    radial-gradient(900px 460px at 88% 0%, rgba(243, 178, 76, 0.08), transparent 58%),
+    radial-gradient(900px 460px at 88% 0%, rgba(167, 58, 52, 0.1), transparent 58%),
     var(--panel);
 }
 
@@ -225,11 +225,11 @@ button {
 
 .hero-title-toggle-thunderstorm {
   color: var(--storm-accent-strong);
-  text-shadow: 0 0 16px rgba(243, 178, 76, 0.14);
+  text-shadow: 0 0 16px rgba(167, 58, 52, 0.16);
 }
 
 .hero-title-toggle-thunderstorm::after {
-  background: rgba(243, 178, 76, 0.9);
+  background: rgba(167, 58, 52, 0.9);
 }
 
 .hero-title-toggle:hover,
@@ -298,7 +298,7 @@ body[data-active-track="thunderstorm"] .hero-title-toggle-rain {
 body[data-active-track="thunderstorm"] .hero-active-card::after {
   background:
     linear-gradient(180deg, rgba(7, 10, 16, 0.08), rgba(7, 10, 16, 0.18)),
-    radial-gradient(460px 220px at 82% 20%, rgba(243, 178, 76, 0.16), transparent 60%);
+    radial-gradient(460px 220px at 82% 20%, rgba(167, 58, 52, 0.22), transparent 60%);
 }
 
 .hero-active-image {
@@ -367,7 +367,7 @@ body[data-active-track="thunderstorm"] .hero-active-card::after {
 .hero-thumb:last-child::before {
   background:
     linear-gradient(180deg, rgba(6, 9, 14, 0.08), rgba(6, 9, 14, 0.18)),
-    radial-gradient(460px 220px at 82% 20%, rgba(243, 178, 76, 0.16), transparent 60%);
+    radial-gradient(460px 220px at 82% 20%, rgba(167, 58, 52, 0.22), transparent 60%);
 }
 
 .hero-thumb:hover,
@@ -445,6 +445,7 @@ body[data-active-track="thunderstorm"] .hero-thumb[data-track-control="rain"] {
   line-height: 0.94;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .hero-video-shell {
@@ -496,6 +497,16 @@ body[data-active-track="thunderstorm"] .hero-thumb[data-track-control="rain"] {
 .btn-primary {
   color: #08111c;
   background: linear-gradient(135deg, var(--active-accent), var(--active-accent-strong));
+}
+
+body[data-active-track="thunderstorm"] .btn-primary {
+  color: #ffffff;
+}
+
+body[data-active-track="thunderstorm"] .release-dock-cta,
+body[data-active-track="thunderstorm"] #activeTrackCta,
+body[data-active-track="thunderstorm"] .track-cta {
+  color: #ffffff;
 }
 
 .btn-secondary {
@@ -717,7 +728,7 @@ body[data-active-track="thunderstorm"] .track-card[data-track-card="thunderstorm
 .track-card[data-track-card="thunderstorm"] {
   background:
     linear-gradient(180deg, rgba(16, 15, 18, 0.92), rgba(10, 12, 18, 0.92)),
-    radial-gradient(420px 180px at 80% 0%, rgba(243, 178, 76, 0.12), transparent 62%);
+    radial-gradient(420px 180px at 80% 0%, rgba(167, 58, 52, 0.18), transparent 62%);
 }
 
 .track-cover-wrap {
@@ -1423,6 +1434,11 @@ footer {
 
   .album-cover-card {
     max-width: 220px;
+    margin-inline: auto;
+  }
+
+  .countdown-topline > div {
+    text-align: center;
   }
 
   .hero-active-card,
