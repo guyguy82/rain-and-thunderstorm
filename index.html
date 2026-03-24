@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Favorite Rain + My Favorite Thunderstorm | Alexandr Misko</title>
+  <meta name="description" content="Official double-single landing page for My Favorite Rain and My Favorite Thunderstorm by Alexandr Misko, part of the Final Boss album campaign.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body data-active-track="rain">
+  <main class="page">
+    <header class="hero panel fade-in" id="hero" aria-label="Featured singles and video">
+      <div class="hero-head">
+        <p class="eyebrow">New Double Single</p>
+        <h1 class="hero-main-title">
+          <span class="hero-title-prefix">My Favorite</span>
+          <button class="hero-title-toggle hero-title-toggle-rain is-active" type="button" data-track-control="rain" aria-pressed="true" aria-controls="releaseDock">
+            Rain
+          </button>
+          <span class="hero-title-joiner">&amp;</span>
+          <button class="hero-title-toggle hero-title-toggle-thunderstorm" type="button" data-track-control="thunderstorm" aria-pressed="false" aria-controls="releaseDock">
+            Thunderstorm
+          </button>
+        </h1>
+        <p class="artist" id="heroArtist">Alexandr Misko</p>
+        <p class="hero-headline-copy">
+          A two-track storm released together for Final Boss: Rain, the loop-built intro, and Thunderstorm, the final fully reimagined main event.
+        </p>
+      </div>
+
+      <div class="hero-main">
+        <div class="hero-media">
+          <div class="hero-active-card" aria-live="polite">
+            <img class="hero-active-image" id="heroActiveImage" src="assets/My-favorite-rain-fixed.jpg" alt="My Favorite Rain cover art">
+            <img class="hero-active-image hero-active-image-ghost" id="heroTransitionImage" src="" alt="" aria-hidden="true">
+          </div>
+
+          <div class="hero-selector" aria-label="Hover or tap a cover to spotlight it">
+            <button class="hero-thumb is-active" type="button" data-track-control="rain" aria-pressed="true" aria-controls="releaseDock">
+              <img class="hero-thumb-image" id="heroImage-rain" src="assets/My-favorite-rain-fixed.jpg" alt="My Favorite Rain cover art">
+              <span class="hero-thumb-hint" aria-hidden="true">Hover or tap to switch</span>
+              <span class="sr-only">Spotlight My Favorite Rain</span>
+            </button>
+
+            <button class="hero-thumb" type="button" data-track-control="thunderstorm" aria-pressed="false" aria-controls="releaseDock">
+              <img class="hero-thumb-image" id="heroImage-thunderstorm" src="assets/My-favorite-rainstorm.jpg" alt="My Favorite Thunderstorm cover art">
+              <span class="hero-thumb-hint" aria-hidden="true">Hover or tap to switch</span>
+              <span class="sr-only">Spotlight My Favorite Thunderstorm</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-video">
+          <section class="release-dock" id="releaseDock" aria-label="Streaming links for the active single">
+            <div class="release-dock-head">
+              <a class="btn btn-primary release-dock-cta" id="activeTrackCta" href="#" target="_blank" rel="noopener noreferrer">
+                Stream My Favorite Rain
+              </a>
+            </div>
+
+            <p class="release-dock-blurb" id="activeTrackBlurb">
+              A loop-built intro that starts as a drizzle, stacks melody into an orchestral swell, and erupts into a distorted solo before the storm breaks.
+            </p>
+
+            <ul class="stream-grid release-dock-grid" id="activeStreamGrid" aria-label="Streaming links for the active single"></ul>
+          </section>
+
+          <section class="hero-video-block" aria-label="Shared video">
+            <h2 class="hero-video-title">Watch the Double-Single Video</h2>
+            <div class="video-shell hero-video-shell" id="videoContainer" aria-live="polite">
+              <p class="video-fallback">Add the combined YouTube embed URL in <code>PAGE_CONFIG</code> to show the shared video here.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel countdown-section fade-in" id="albumCountdown" data-delay="2">
+      <div class="countdown-layout">
+        <div class="album-cover-card">
+          <img id="albumCover" src="assets/final-boss-cover.jpg" alt="Final Boss album cover">
+        </div>
+
+        <div class="countdown-copy">
+          <div class="countdown-topline">
+            <div>
+              <h2 class="section-title">Final Boss Countdown</h2>
+              <p class="countdown-release-note">Album release date: April 24, 2026</p>
+            </div>
+            <a class="btn btn-spotify countdown-presave" id="albumPreSaveBtn" href="#" target="_blank" rel="noopener noreferrer">
+              Pre-save Final Boss on Spotify
+            </a>
+          </div>
+
+          <div class="countdown-grid" aria-label="Time remaining until album release">
+            <div class="countdown-item">
+              <div class="count-value" id="daysValue">0</div>
+              <div class="count-label">Days</div>
+            </div>
+            <div class="countdown-item">
+              <div class="count-value" id="hoursValue">00</div>
+              <div class="count-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+              <div class="count-value" id="minutesValue">00</div>
+              <div class="count-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+              <div class="count-value" id="secondsValue">00</div>
+              <div class="count-label">Seconds</div>
+            </div>
+          </div>
+
+          <p class="countdown-state" id="countdownState" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel section fade-in tablature-section" id="tablatureSection" data-delay="3">
+      <div class="tab-layout">
+        <div class="tab-copy">
+          <h2 class="section-title">Official Tablature</h2>
+          <p class="section-text" id="tabIntro">
+            The official double-single tablature package covers both My Favorite Rain and My Favorite Thunderstorm in their Final Boss versions.
+          </p>
+          <ul class="tab-points" id="tabPoints"></ul>
+          <a class="btn btn-primary" id="buyTabBtn" href="#" target="_blank" rel="noopener noreferrer">Buy tablature</a>
+        </div>
+        <div class="tab-preview-frame">
+          <img id="tabPreviewImage" src="assets/tablature-preview.jpg" alt="Double-single tablature preview">
+        </div>
+      </div>
+    </section>
+
+    <div class="bottom-grid fade-in" data-delay="4">
+      <section class="panel section previous-releases-section" aria-labelledby="previousSinglesTitle">
+        <div class="bottom-section-head">
+          <h2 class="section-title" id="previousSinglesTitle">Previously Released Singles</h2>
+          <p class="section-text bottom-section-copy">Earlier releases from the same Final Boss album cycle.</p>
+        </div>
+        <div class="previous-singles-grid" id="previousSinglesGrid"></div>
+      </section>
+
+      <section class="panel section subscribe-section" aria-labelledby="subscribeHeadline">
+        <div class="subscribe-wrap">
+          <h2 class="subscribe-headline" id="subscribeHeadline">Enter the world of Final Boss</h2>
+          <p class="subscribe-subline">Unlock early previews, new single drops and exclusive guitar content</p>
+          <form class="subscribe-form" id="subscribeForm" novalidate>
+            <label for="websiteField" class="honeypot">Leave this field empty</label>
+            <input id="websiteField" class="honeypot" name="website" type="text" autocomplete="off" tabindex="-1">
+            <label for="emailInput" class="sr-only">Email address</label>
+            <input id="emailInput" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Enter your email" required>
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </form>
+          <p class="form-note" id="formNote" aria-live="polite"></p>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      &copy; <span id="yearValue"></span> Alexandr Misko. All rights reserved.
+    </footer>
+  </main>
+
+  <aside class="countdown-chip" aria-label="Persistent countdown">
+    <div class="countdown-chip-header">
+      <div>
+        <p class="countdown-chip-title">Final Boss ETA</p>
+        <div class="countdown-chip-summary" id="chipSummary">--d --h --m</div>
+      </div>
+      <button class="countdown-chip-toggle" id="chipToggleBtn" type="button" aria-expanded="false" aria-controls="chipPanel">
+        Expand
+      </button>
+    </div>
+
+    <div class="countdown-chip-panel" id="chipPanel">
+      <div class="countdown-chip-grid" aria-hidden="true">
+        <div class="countdown-chip-item">
+          <div class="countdown-chip-value" id="chipDays">0</div>
+          <div class="countdown-chip-label">Days</div>
+        </div>
+        <div class="countdown-chip-item">
+          <div class="countdown-chip-value" id="chipHours">00</div>
+          <div class="countdown-chip-label">Hours</div>
+        </div>
+        <div class="countdown-chip-item">
+          <div class="countdown-chip-value" id="chipMinutes">00</div>
+          <div class="countdown-chip-label">Minutes</div>
+        </div>
+        <div class="countdown-chip-item">
+          <div class="countdown-chip-value" id="chipSeconds">00</div>
+          <div class="countdown-chip-label">Seconds</div>
+        </div>
+      </div>
+      <p class="countdown-chip-state" id="chipState">Preparing countdown...</p>
+      <a class="btn btn-spotify countdown-chip-presave" id="chipPreSaveBtn" href="#" target="_blank" rel="noopener noreferrer">
+        Pre-save Final Boss on Spotify
+      </a>
+    </div>
+  </aside>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
