@@ -937,6 +937,58 @@ body[data-active-track="thunderstorm"] .track-card[data-track-card="thunderstorm
   align-content: start;
 }
 
+.tab-switcher {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  width: fit-content;
+  padding: 0.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tab-switch {
+  min-height: 38px;
+  min-width: 132px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  background: transparent;
+  color: #d7deea;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.tab-switch:hover,
+.tab-switch:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.16);
+  outline: none;
+}
+
+.tab-switch.is-active {
+  background: linear-gradient(135deg, var(--rain-accent), var(--rain-accent-strong));
+  color: #08111c;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+}
+
+.tablature-section[data-active-tab="thunderstorm"] .tab-switch.is-active {
+  background: linear-gradient(135deg, var(--storm-accent), var(--storm-accent-strong));
+  color: #ffffff;
+}
+
+.tab-track-title {
+  margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  line-height: 0.94;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #f5f8ff;
+}
+
 .tab-copy .section-text {
   margin: 0;
   max-width: 40ch;
@@ -952,7 +1004,21 @@ body[data-active-track="thunderstorm"] .track-card[data-track-card="thunderstorm
 }
 
 .tab-points li::marker {
-  color: var(--active-accent-strong);
+  color: var(--rain-accent-strong);
+}
+
+.tablature-section[data-active-tab="thunderstorm"] .tab-points li::marker {
+  color: var(--storm-accent-strong);
+}
+
+#buyTabBtn {
+  background: linear-gradient(135deg, var(--rain-accent), var(--rain-accent-strong));
+  color: #08111c;
+}
+
+.tablature-section[data-active-tab="thunderstorm"] #buyTabBtn {
+  background: linear-gradient(135deg, var(--storm-accent), var(--storm-accent-strong));
+  color: #ffffff;
 }
 
 .tab-preview-frame {
@@ -1481,6 +1547,14 @@ footer {
 
   .subscribe-form {
     grid-template-columns: 1fr;
+  }
+
+  .tab-switcher {
+    width: 100%;
+  }
+
+  .tab-switch {
+    min-width: 0;
   }
 }
 

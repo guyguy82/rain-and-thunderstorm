@@ -8,14 +8,34 @@ const PAGE_CONFIG = {
     coverImage: "assets/final-boss-cover.jpg"
   },
   tablature: {
-    previewImage: "assets/tablature-preview.jpg",
-    buyUrl: "",
-    intro:
-      "The official double-single tablature package covers both My Favorite Rain and My Favorite Thunderstorm in their Final Boss versions.",
-    points: [
-      "Covers the layered loop construction of Rain and the full reworked arrangement of Thunderstorm.",
-      "Includes note-for-note detail for melodies, percussion, groove shifts, and key special effects.",
-      "Built for players who want the latest Final Boss-era versions in one package."
+    activeId: "rain",
+    tracks: [
+      {
+        id: "rain",
+        title: "My Favorite Rain",
+        previewImage: "assets/RAIN TAB COVER.jpg",
+        buyUrl: "https://alexandr-misko.myshopify.com/collections/guitar-tabs/products/intergalactic-march-guitar-tab-alexandr-misko-copy",
+        intro:
+          "A live-looping intro built to stack the Thunderstorm themes in real time, with detailed guidance for layers, transitions, and pedal work.",
+        points: [
+          "Explains the loop structure, timing, and live build-up behind the full Rain intro.",
+          "Covers pedal use, transitions, and the key effects needed to shape the album-era sound.",
+          "Includes Guitar Pro 7, PDF, and the WAV album version in the package."
+        ]
+      },
+      {
+        id: "thunderstorm",
+        title: "My Favorite Thunderstorm",
+        previewImage: "assets/THUNDERSTORM TAB COVER.jpg",
+        buyUrl: "https://alexandr-misko.myshopify.com/collections/guitar-tabs/products/my-favorite-thunderstorm-guitar-tab-alexandr-misko",
+        intro:
+          "The ultimate version of Thunderstorm, focused on its two-handed tapping core, expanded middle section, and full live-performance detail.",
+        points: [
+          "Breaks down the over-the-neck tapping language and the full reworked structure of the piece.",
+          "Explains the detuner sections, percussive passages, and practical adaptation ideas for standard guitars.",
+          "Includes Guitar Pro 7, PDF, and the WAV album version in the package."
+        ]
+      }
     ]
   },
   previousSingles: [
@@ -92,6 +112,7 @@ const STREAMING_PLATFORMS = [
 ];
 
 let activeTrackId = "rain";
+let activeTabTrackId = "rain";
 let heroSwapTimer = 0;
 
 function hasTrack(trackId) {
@@ -108,6 +129,16 @@ function getTrack(trackId) {
 
 function getTrackIndex(trackId) {
   return PAGE_CONFIG.singles.findIndex((track) => track.id === trackId);
+}
+
+function hasTabTrack(trackId) {
+  const tabTracks = (PAGE_CONFIG.tablature && PAGE_CONFIG.tablature.tracks) || [];
+  return tabTracks.some((track) => track.id === trackId);
+}
+
+function getTabTrack(trackId) {
+  const tabTracks = (PAGE_CONFIG.tablature && PAGE_CONFIG.tablature.tracks) || [];
+  return tabTracks.find((track) => track.id === trackId) || tabTracks[0];
 }
 
 function setAnchorHrefOrDisable(element, url) {
@@ -334,19 +365,36 @@ function renderActiveRelease(track) {
 }
 
 function renderTablatureSection() {
+  const section = document.getElementById("tablatureSection");
+  const trackTitle = document.getElementById("tabTrackTitle");
   const intro = document.getElementById("tabIntro");
   const points = document.getElementById("tabPoints");
   const previewImage = document.getElementById("tabPreviewImage");
   const buyBtn = document.getElementById("buyTabBtn");
-  const config = PAGE_CONFIG.tablature || {};
+  const activeTab = getTabTrack(activeTabTrackId);
+
+  if (section) {
+    section.dataset.activeTab = activeTabTrackId;
+  }
+
+  document.querySelectorAll("[data-tab-track]").forEach((control) => {
+    const trackId = control.getAttribute("data-tab-track");
+    const isActive = trackId === activeTabTrackId;
+    control.classList.toggle("is-active", isActive);
+    control.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+
+  if (trackTitle) {
+    trackTitle.textContent = activeTab ? activeTab.title : "";
+  }
 
   if (intro) {
-    intro.textContent = config.intro || "";
+    intro.textContent = activeTab && activeTab.intro ? activeTab.intro : "";
   }
 
   if (points) {
     points.innerHTML = "";
-    (config.points || []).forEach((item) => {
+    ((activeTab && activeTab.points) || []).forEach((item) => {
       const li = document.createElement("li");
       li.textContent = item;
       points.appendChild(li);
@@ -354,8 +402,8 @@ function renderTablatureSection() {
   }
 
   if (previewImage) {
-    previewImage.src = resolveAssetUrl(config.previewImage || "assets/tablature-preview.jpg");
-    previewImage.alt = PAGE_CONFIG.artistName + " double-single tablature preview";
+    previewImage.src = resolveAssetUrl((activeTab && activeTab.previewImage) || "assets/tablature-preview.jpg");
+    previewImage.alt = (activeTab && activeTab.title ? activeTab.title : PAGE_CONFIG.artistName) + " tablature cover";
     previewImage.addEventListener(
       "error",
       () => {
@@ -366,7 +414,25 @@ function renderTablatureSection() {
     );
   }
 
-  setAnchorHrefOrDisable(buyBtn, config.buyUrl || "");
+  setAnchorHrefOrDisable(buyBtn, (activeTab && activeTab.buyUrl) || "");
+}
+
+function initTablatureSection() {
+  const tabConfig = PAGE_CONFIG.tablature || {};
+  activeTabTrackId = hasTabTrack(tabConfig.activeId) ? tabConfig.activeId : "rain";
+
+  document.querySelectorAll("[data-tab-track]").forEach((control) => {
+    const trackId = control.getAttribute("data-tab-track");
+    if (!trackId) return;
+
+    control.addEventListener("click", () => {
+      if (!hasTabTrack(trackId)) return;
+      activeTabTrackId = trackId;
+      renderTablatureSection();
+    });
+  });
+
+  renderTablatureSection();
 }
 
 function renderPreviousSingles() {
@@ -654,6 +720,7 @@ function init() {
   PAGE_CONFIG.singles.forEach(renderTrack);
   syncHeroAndCards();
   initHero();
+  initTablatureSection();
   initSubscribeForm();
   initCountdownChip();
   updateCountdown();
