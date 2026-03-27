@@ -503,8 +503,6 @@ body[data-active-track="thunderstorm"] .btn-primary {
   color: #ffffff;
 }
 
-body[data-active-track="thunderstorm"] .release-dock-cta,
-body[data-active-track="thunderstorm"] #activeTrackCta,
 body[data-active-track="thunderstorm"] .track-cta {
   color: #ffffff;
 }
@@ -670,9 +668,29 @@ body[data-active-track="thunderstorm"] .track-cta {
 
 .release-dock-head {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
-  gap: 1rem;
+}
+
+.release-switcher {
+  width: 100%;
+}
+
+.release-switch {
+  min-width: 0;
+  min-height: 48px;
+  padding-inline: 1rem;
+}
+
+.release-dock .tab-switch.is-active {
+  background: linear-gradient(135deg, var(--rain-accent), var(--rain-accent-strong));
+  color: #08111c;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+}
+
+body[data-active-track="thunderstorm"] .release-dock .tab-switch.is-active {
+  background: linear-gradient(135deg, var(--storm-accent), var(--storm-accent-strong));
+  color: #ffffff;
 }
 
 .release-dock-blurb {
@@ -680,12 +698,6 @@ body[data-active-track="thunderstorm"] .track-cta {
   color: #d7deea;
   max-width: 48ch;
   line-height: 1.35;
-}
-
-.release-dock-cta {
-  position: relative;
-  flex-shrink: 0;
-  animation: releaseCtaFloat 2.8s ease-in-out infinite;
 }
 
 .release-dock-grid {
@@ -804,6 +816,9 @@ body[data-active-track="thunderstorm"] .track-card[data-track-card="thunderstorm
 .stream-link:focus-visible {
   transform: translateY(-1px);
   border-color: rgba(255, 255, 255, 0.28);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04)),
+    radial-gradient(240px 120px at 0% 0%, var(--active-glow), transparent 70%);
   outline: none;
 }
 
@@ -819,6 +834,14 @@ body[data-active-track="thunderstorm"] .track-card[data-track-card="thunderstorm
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.stream-link:not(.disabled) .status-pill {
+  color: var(--active-accent-strong);
+}
+
+body[data-active-track="thunderstorm"] .stream-link:not(.disabled) .status-pill {
+  color: var(--storm-accent-strong);
 }
 
 .countdown-layout {
@@ -1570,8 +1593,7 @@ footer {
   }
 
   .track-cta,
-  .btn-spotify,
-  .release-dock-cta {
+  .btn-spotify {
     width: 100%;
   }
 

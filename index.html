@@ -55,9 +55,14 @@
         <div class="hero-video">
           <section class="release-dock" id="releaseDock" aria-label="Streaming links for the active single">
             <div class="release-dock-head">
-              <a class="btn btn-primary release-dock-cta" id="activeTrackCta" href="#" target="_blank" rel="noopener noreferrer">
-                Stream My Favorite Rain
-              </a>
+              <div class="tab-switcher release-switcher" aria-label="Choose streaming single">
+                <button class="tab-switch release-switch is-active" type="button" data-track-control="rain" aria-pressed="true">
+                  Stream My Favorite Rain
+                </button>
+                <button class="tab-switch release-switch" type="button" data-track-control="thunderstorm" aria-pressed="false">
+                  Stream My Favorite Thunderstorm
+                </button>
+              </div>
             </div>
 
             <p class="release-dock-blurb" id="activeTrackBlurb">

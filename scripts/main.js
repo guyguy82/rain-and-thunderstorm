@@ -1,6 +1,6 @@
 const PAGE_CONFIG = {
   artistName: "Alexandr Misko",
-  youtubeEmbedUrl: "https://www.youtube.com/embed/-dF-RukgnIo",
+  youtubeEmbedUrl: "https://www.youtube.com/watch?v=ayFPmmsVWJs",
   album: {
     title: "Final Boss",
     releaseISO: "2026-04-24T00:00:00Z",
@@ -67,15 +67,14 @@ const PAGE_CONFIG = {
       accent: "rain",
       blurb: "A loop-built intro that starts as a drizzle, stacks melody into an orchestral swell, and erupts into a distorted solo before the storm breaks.",
       streamingLinks: {
-        spotify: "",
-        appleMusic: "",
-        tidal: "",
-        yandexMusic: "",
-        itunes: "",
-        deezer: "",
-        qobuz: "",
-        youtubeMusic: "",
-        amazonMusic: ""
+        spotify: "https://open.spotify.com/album/0so0HJ5qcC68a87ITw6Q8p",
+        appleMusic: "https://music.apple.com/us/album/my-favorite-rain-single/1886221590",
+        tidal: "https://tidal.com/album/508120210",
+        yandexMusic: "https://music.yandex.ru/album/41210879",
+        deezer: "https://www.deezer.com/en/album/942518821",
+        qobuz: "https://www.qobuz.com/us-en/album/my-favorite-rain-alexandr-misko/lo9h5uj2zc0d5",
+        youtubeMusic: "https://music.youtube.com/playlist?list=OLAK5uy_nE7_oiSkNKMrv-6g-7fR3CjjUSStpH-AA",
+        amazonMusic: "https://music.amazon.com/albums/B0GT169VZ5"
       }
     },
     {
@@ -85,15 +84,14 @@ const PAGE_CONFIG = {
       accent: "thunderstorm",
       blurb: "A fully reimagined classic that fuses progressive metal drive, symphonic sweep, and Frankenstein Guitar effects into its final thunder.",
       streamingLinks: {
-        spotify: "",
-        appleMusic: "",
-        tidal: "",
-        yandexMusic: "",
-        itunes: "",
-        deezer: "",
-        qobuz: "",
-        youtubeMusic: "",
-        amazonMusic: ""
+        spotify: "https://open.spotify.com/album/50KHG9ig0dnF4aRNEPj0MJ",
+        appleMusic: "https://music.apple.com/us/album/my-favorite-thunderstorm-single/1885792031",
+        tidal: "https://tidal.com/album/507757941",
+        yandexMusic: "https://music.yandex.ru/album/41184827",
+        deezer: "https://www.deezer.com/en/album/941477141",
+        qobuz: "https://www.qobuz.com/us-en/album/my-favorite-thunderstorm-alexandr-misko/bj5wdadl28gvt",
+        youtubeMusic: "https://music.youtube.com/playlist?list=OLAK5uy_kVEHtHj-YHw06_NFEG9Dg3L_7FVZT1d1Y",
+        amazonMusic: "https://music.amazon.com/albums/B0GSVP6NX5"
       }
     }
   ]
@@ -104,7 +102,6 @@ const STREAMING_PLATFORMS = [
   { key: "appleMusic", label: "Apple Music" },
   { key: "tidal", label: "TIDAL" },
   { key: "yandexMusic", label: "Yandex Music" },
-  { key: "itunes", label: "iTunes" },
   { key: "deezer", label: "Deezer" },
   { key: "qobuz", label: "Qobuz" },
   { key: "youtubeMusic", label: "YouTube Music" },
@@ -349,16 +346,10 @@ function animateHeroSwap(track, previousTrackId) {
 
 function renderActiveRelease(track) {
   const blurb = document.getElementById("activeTrackBlurb");
-  const primaryCta = document.getElementById("activeTrackCta");
   const grid = document.getElementById("activeStreamGrid");
 
   if (blurb) {
     blurb.textContent = track.blurb || "";
-  }
-
-  if (primaryCta) {
-    primaryCta.textContent = "Stream " + track.title;
-    setAnchorHrefOrDisable(primaryCta, findPrimaryTrackUrl(track));
   }
 
   renderStreamingLinks(grid, track);
@@ -581,8 +572,11 @@ function initHero() {
     if (!trackId) return;
 
     node.addEventListener("click", () => setActiveTrack(trackId));
-    node.addEventListener("focus", () => setActiveTrack(trackId));
-    node.addEventListener("mouseenter", () => setActiveTrack(trackId));
+
+    if (!node.classList.contains("release-switch")) {
+      node.addEventListener("focus", () => setActiveTrack(trackId));
+      node.addEventListener("mouseenter", () => setActiveTrack(trackId));
+    }
   });
 
   const heroThumbs = Array.from(document.querySelectorAll(".hero-thumb[data-track-control]"));
